@@ -1,38 +1,128 @@
-.App {
-  text-align: center;
+* {
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* a {
+  text-decoration: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+* a:hover {
+  text-decoration: underline;
+}
+
+.search {
+  width: 100%;
+  padding-left: 1%;
+  border-radius: 15px;
+  box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
+}
+
+.search input {
+  text-align: none;
+  border: none;
+  padding: 2%;
+  width: 88%;
+  background-color: unset;
+}
+
+.search input:focus,
+textarea {
+  outline: none;
+}
+
+.search button {
+  width: 10%;
+  padding: 1%;
+  border-radius: 10px;
+}
+
+.search button:hover {
+  background: #60ABFF;
+  transition: 0.5s;
+}
+
+.info {
+  border-radius: 15px;
+  padding: 3%;
+}
+
+
+.reposAndFollow {
+  padding: 1%;
+  border-radius: 10px;
+  font-weight: 800;
+  margin-bottom: 3%;
+}
+
+.links {
+  width: 40%;
+}
+
+@media only screen and (max-width: 992px) {
+  .search input {
+    width: 80%;
+  }
+
+  .search button {
+    width: 15%;
+  }
+
+  .info .myColImg {
+    width: 20%;
+  }
+
+  .info .myColInfo {
+    width: 70%;
+  }
+
+  .reposAndFollow .col-md-4 {
+    width: 33.3%;
+    font-size: 90%;
+  }
+
+  .links {
+    width: 40%;
+    font-size: 80%;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+@media only screen and (max-width: 370px) {
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .search input {
+    width: 60%;
+    font-size: 60%;
   }
-  to {
-    transform: rotate(360deg);
+
+  .search button {
+    width: 25%;
+    font-size: 60%;
+  }
+
+  .reposAndFollow .col-md-4 {
+    width: 33.3%;
+    font-size: 60%;
+  }
+
+  .links {
+    width: 100%;
+  }
+}
+
+
+@media only screen and (max-width: 240px) {
+  .myColImg{
+    width: 100%;
+  }
+  h1{
+    font-size: 80%;
+  }
+  a{
+    font-size: 50%;
+  }
+  p{
+    font-size: 60%;
+  }
+  .links{
+    font-size: 50%;
   }
 }

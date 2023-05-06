@@ -3,7 +3,7 @@ import axios from "axios";
 import { IoMdPin, IoLogoTwitter } from 'react-icons/io'
 import { FiLink } from 'react-icons/fi'
 import { HiOutlineBuildingOffice2 } from 'react-icons/hi2'
-import {BsFillMoonFill,BsFillSunFill} from 'react-icons/bs'
+import { BsSearch, BsFillMoonFill, BsFillSunFill } from 'react-icons/bs'
 
 import { ThreeDots } from "react-loader-spinner";
 
@@ -44,7 +44,20 @@ export default function Home() {
         }
     }
 
-    console.log(info);
+    const [mode, setMode] = useState(true);
+
+    if (mode) {
+        document.body.style.background = '#F6F8FF';
+        document.body.style.color = 'black';
+    } else {
+        document.body.style.background = '#141D2F';
+        document.body.style.color = 'white';
+    }
+
+
+    const createdYear = new Date(info.created_at).getFullYear();
+    const createdMonth = new Date(info.created_at).getUTCMonth();
+    const createdDay = new Date(info.created_at).getDate();
 
     return (
         <div className="container">
@@ -69,18 +82,21 @@ export default function Home() {
                                 <h3>devfinder</h3>
                             </div>
                             <div className="col text-end">
-                                <button><BsFillMoonFill/> Dark mode / <BsFillSunFill/> Light mode</button>
+                                <button style={{ backgroundColor: 'unset', border: 'none' }} onClick={() => setMode(!mode)}> {mode ? <>Dark <BsFillMoonFill /></> : <div style={{ color: 'white' }}>Light <BsFillSunFill /></div>}</button>
                             </div>
                         </div>
 
-                        <input type="text" placeholder="Search GitHub username..." onChange={(e) => setUser(e.target.value)} onKeyDown={searchEnter} />
-                        <button onClick={() => search()}>Search</button>
+                        <div className="search" style={mode ? { backgroundColor: 'white' } : { backgroundColor: "#1E2A47" }}>
+                            <BsSearch style={mode ? { color: 'black' } : { color: 'white' }} />
+                            <input type="text" placeholder="Search GitHub username..." style={mode ? { color: 'black' } : { color: 'white' }} onChange={(e) => setUser(e.target.value)} onKeyDown={searchEnter} />
+                            <button className="btn btn-primary" onClick={() => search()}>Search</button>
+                        </div>
 
-                        <div className="row mt-5">
-                            <div className="col-md-3">
+                        <div className="row mt-5 info" style={mode ? { backgroundColor: 'white' } : { backgroundColor: '#1E2A47' }}>
+                            <div className="col-md-3 myColImg">
                                 <img src={info.avatar_url} style={{ borderRadius: '50%' }} className='img-fluid' alt="" />
                             </div>
-                            <div className="col-md-9">
+                            <div className="col-md-9 myColInfo">
                                 <div className="row">
                                     <div className="col-md">
                                         <h1>{info.name}</h1>
@@ -93,26 +109,28 @@ export default function Home() {
                                         }
                                     </div>
                                     <div className="col-md-6 pt-3">
-                                        <p style={{ color: 'gray' }}>Joinded at {info.created_at}</p>
+                                        <p style={{ color: 'gray' }}>Joinded {createdDay} {createdMonth} {createdYear}</p>
                                     </div>
                                 </div>
-                                <div className="row">
+
+                                <div className="row reposAndFollow" style={mode ? { backgroundColor: '#F6F8FF' } : { backgroundColor: '#141D2F' }}>
                                     <div className="col-md-4">
                                         <p>Repos</p>
-                                        <h3>{info.public_repos}</h3>
+                                        <h1>{info.public_repos}</h1>
                                     </div>
                                     <div className="col-md-4">
                                         <p>Followers</p>
-                                        <h3>{info.followers}</h3>
+                                        <h1>{info.followers}</h1>
                                     </div>
                                     <div className="col-md-4">
                                         <p>Following</p>
-                                        <h3>{info.following}</h3>
+                                        <h1>{info.following}</h1>
                                     </div>
                                 </div>
+
                                 <div className="row">
-                                    <div className="col-md-6">
-                                        <IoMdPin />
+                                    <div className="links">
+                                        <IoMdPin style={{ width: '5%', height: "30px" }} />
                                         {
                                             info.location ?
                                                 <span>{info.location}</span>
@@ -120,8 +138,8 @@ export default function Home() {
                                                 <span>Not Available</span>
                                         }
                                     </div>
-                                    <div className="col-md-6">
-                                        <IoLogoTwitter />
+                                    <div className="links">
+                                        <IoLogoTwitter style={{ width: '5%', height: "30px" }} />
                                         {
                                             info.twitter_username ?
                                                 <a href={info.twitter_username}>{info.twitter_username}</a>
@@ -129,8 +147,8 @@ export default function Home() {
                                                 <span>Not Available</span>
                                         }
                                     </div>
-                                    <div className="col-md-6">
-                                        <FiLink />
+                                    <div className="links">
+                                        <FiLink style={{ width: '5%', height: "30px" }} />
                                         {
                                             info.blog ?
                                                 <a href={info.blog}>{info.blog}</a>
@@ -138,8 +156,8 @@ export default function Home() {
                                                 <span>Not Available</span>
                                         }
                                     </div>
-                                    <div className="col-md-6">
-                                        <HiOutlineBuildingOffice2 />
+                                    <div className="links">
+                                        <HiOutlineBuildingOffice2 style={{ width: '5%', height: "30px" }} />
                                         {
                                             info.company ?
                                                 <span>{info.company}</span>
